@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wangoi Mwangi — DevOps Engineer. Cloud infrastructure, CI/CD, Kubernetes, and automation." />
+  <title>Wangoi Mwangi — DevOps Engineer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ─── CSS Custom Properties ──────────────────────────────────────────── */
+    :root {
+      --bg-primary:    #0a0f1e;
+      --bg-secondary:  #0d1526;
+      --bg-card:       #111827;
+      --bg-card-hover: #141f35;
+      --accent:        #00d4ff;
+      --accent-dim:    rgba(0, 212, 255, 0.12);
+      --accent-glow:   rgba(0, 212, 255, 0.3);
+      --green:         #00ff88;
+      --text-primary:  #f0f4ff;
+      --text-secondary:#8b9ab5;
+      --text-muted:    #4a5878;
+      --border:        rgba(0, 212, 255, 0.12);
+      --border-hover:  rgba(0, 212, 255, 0.4);
+      --font-body:     'Inter', sans-serif;
+      --font-heading:  'Space Grotesk', sans-serif;
+      --font-mono:     'JetBrains Mono', monospace;
+      --radius:        12px;
+      --radius-sm:     8px;
+      --transition:    0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --nav-height:    72px;
+    }
+
+    /* ─── Reset & Base ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-height);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+
+    /* ─── Scrollbar ──────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-glow); border-radius: 3px; }
+
+    /* ─── Utility ────────────────────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 48px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 560px;
+    }
+
+    .section-header { margin-bottom: 56px; }
+
+    section { padding: 100px 0; }
+
+    /* ─── Buttons ────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-primary);
+    }
+    .btn-primary:hover {
+      background: #33dcff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+    .btn-outline:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-2px);
+    }
+
+    /* ─── Reveal Animation ───────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease;
+    }
+
+    #navbar.scrolled {
+      background: rgba(10, 15, 30, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 1010;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(10, 15, 30, 0.98);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 12px 32px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      width: 100%;
+      text-align: center;
+    }
+    .mobile-menu a:hover { color: var(--accent); background: var(--accent-dim); }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════════════════ */
+    #home {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    /* Canvas background */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Gradient overlay */
+    #home::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,212,255,0.06) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 820px;
+      padding: 0 24px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      opacity: 0.85;
+    }
+
+    .hero-name {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .hero-name .period {
+      color: var(--accent);
+      text-shadow: 0 0 32px var(--accent-glow);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-mono);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      color: var(--text-primary);
+      margin-bottom: 48px;
+      min-height: 2em;
+      opacity: 0.9;
+    }
+    .hero-tagline .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      animation: float 2.4s ease-in-out infinite;
+    }
+    .hero-scroll i { color: var(--accent); font-size: 1rem; }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════════════════════════════════ */
+    #about { background: var(--bg-secondary); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .about-avatar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      position: sticky;
+      top: calc(var(--nav-height) + 24px);
+    }
+
+    .about-avatar {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg-card) 0%, #1a2744 100%);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .about-avatar::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent) 0deg, transparent 120deg, transparent 240deg, var(--accent) 360deg);
+      animation: rotate 6s linear infinite;
+      z-index: -1;
+    }
+    .about-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .avatar-initials {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 32px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .about-text .section-header { margin-bottom: 28px; }
+
+    .about-body p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+    .about-body p:last-child { margin-bottom: 32px; }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       TECH STACK
+    ═══════════════════════════════════════════════════════════════════════ */
+    #tech-stack { background: var(--bg-primary); }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .stack-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+    }
+    .stack-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border-hover);
+    }
+
+    .stack-category {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .stack-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tool-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      font-size: 0.825rem;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .tool-chip:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+      background: var(--accent-dim);
+    }
+    .tool-chip img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       PROJECTS
+    ═══════════════════════════════════════════════════════════════════════ */
+    #projects { background: var(--bg-secondary); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      position: relative;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px var(--border-hover);
+    }
+    .project-card:hover .project-link-icon {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    .project-number {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .project-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      color: var(--text-secondary);
+      font-size: 0.925rem;
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .project-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      transition: var(--transition);
+    }
+    .project-link:hover { gap: 10px; }
+
+    .project-link-icon {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: var(--transition);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════════════════════════════════ */
+    #services { background: var(--bg-primary); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .service-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+    }
+
+    .service-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .service-desc {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       BLOG
+    ═══════════════════════════════════════════════════════════════════════ */
+    #blog {
+      background: var(--bg-secondary);
+      position: relative;
+      overflow: hidden;
+    }
+    #blog::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+    #blog::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.3;
+    }
+
+    .blog-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .blog-body {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .medium-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 14px 4px 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .medium-dot {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(0,255,136,0); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════════════════════════════════ */
+    #contact { background: var(--bg-primary); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: var(--transition);
+      resize: none;
+      outline: none;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-success {
+      display: none;
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px solid rgba(0, 255, 136, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      color: var(--green);
+      font-size: 0.9rem;
+      align-items: center;
+      gap: 10px;
+    }
+    .form-success.show { display: flex; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .contact-card:hover {
+      border-color: var(--border-hover);
+      transform: translateX(4px);
+      background: var(--bg-card-hover);
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .contact-card-info { min-width: 0; }
+    .contact-card-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .contact-card-value {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .contact-card:hover .contact-card-value { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════════════════ */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .footer-copy span { color: var(--accent); }
+
+    .footer-socials {
+      display: flex;
+      gap: 8px;
+    }
+    .footer-social {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      transition: var(--transition);
+    }
+    .footer-social:hover {
+      color: var(--accent);
+      border-color: var(--border-hover);
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    /* ─── Back to Top ────────────────────────────────────────────────────── */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 500;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: var(--transition);
+      pointer-events: none;
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    #back-to-top:hover {
+      background: #33dcff;
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .about-grid    { grid-template-columns: 1fr; gap: 48px; }
+      .about-avatar-wrap { position: static; flex-direction: row; align-items: center; justify-content: flex-start; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-grid  { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger  { display: flex; }
+      section { padding: 72px 0; }
+      .about-stats { gap: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .about-avatar { width: 160px; height: 160px; }
+      .avatar-initials { font-size: 2.2rem; }
+      .hero-ctas { flex-direction: column; align-items: stretch; }
+      .hero-ctas .btn { justify-content: center; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="#home" class="nav-logo">Wangoi<span>.</span></a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#home"       class="nav-link active">Home</a></li>
+        <li><a href="#about"      class="nav-link">About</a></li>
+        <li><a href="#tech-stack" class="nav-link">Tech Stack</a></li>
+        <li><a href="#projects"   class="nav-link">Projects</a></li>
+        <li><a href="#services"   class="nav-link">Services</a></li>
+        <li><a href="#blog"       class="nav-link">Blog</a></li>
+        <li><a href="#contact"    class="nav-link">Contact</a></li>
+      </ul>
+
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="#home"       class="mobile-nav-link">Home</a>
+    <a href="#about"      class="mobile-nav-link">About</a>
+    <a href="#tech-stack" class="mobile-nav-link">Tech Stack</a>
+    <a href="#projects"   class="mobile-nav-link">Projects</a>
+    <a href="#services"   class="mobile-nav-link">Services</a>
+    <a href="#blog"       class="mobile-nav-link">Blog</a>
+    <a href="#contact"    class="mobile-nav-link">Contact</a>
+  </div>
+
+  <main>
+    <!-- ═══ HERO ═══ -->
+    <section id="home" aria-label="Hero">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <p class="hero-eyebrow">DevOps Engineer</p>
+        <h1 class="hero-name">Wangoi Mwangi<span class="period">.</span></h1>
+        <p class="hero-title">Infrastructure &nbsp;·&nbsp; Automation &nbsp;·&nbsp; Reliability</p>
+        <p class="hero-tagline" id="hero-tagline" aria-live="polite"><span class="cursor"></span></p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i> View My Work
+          </a>
+          <a href="#" class="btn btn-outline" download>
+            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV
+          </a>
+          <a href="#contact" class="btn btn-ghost">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Let's Talk
+          </a>
+        </div>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>scroll</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about" aria-label="About">
+      <div class="container">
+        <div class="about-grid">
+          <!-- Left: Avatar -->
+          <div class="about-avatar-wrap reveal">
+            <div class="about-avatar" aria-hidden="true">
+              <span class="avatar-initials">WM</span>
+            </div>
+            <div class="about-stats">
+              <div class="stat">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Projects</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Clouds</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Text -->
+          <div class="about-text">
+            <div class="section-header reveal reveal-delay-1">
+              <p class="section-label">About</p>
+              <h2 class="section-title">I'm Wangoi Mwangi, a DevOps Engineer who builds infrastructure that teams rely on.</h2>
+            </div>
+            <div class="about-body reveal reveal-delay-2">
+              <p>I've always believed the best infrastructure is the kind you don't have to think about. Secure, scalable, quietly doing its job — and getting there is exactly the kind of work I enjoy.</p>
+              <p>I've worked with startups moving fast, enterprises that can't afford downtime, and remote teams spread across time zones. The context changes, the standards don't.</p>
+              <p>If something here resonates with you, let's talk.</p>
+              <a href="#contact" class="btn btn-primary">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Let's Talk
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TECH STACK ═══ -->
+    <section id="tech-stack" aria-label="Tech Stack">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label">Skills</p>
+          <h2 class="section-title">Tech Stack</h2>
+          <p class="section-subtitle">The tools I use in production.</p>
+        </div>
+
+        <div class="stack-grid">
+          <!-- Cloud -->
+          <div class="stack-card reveal reveal-delay-1">
+            <p class="stack-category">Cloud</p>
+            <div class="stack-tools">
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" />
+                AWS
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" alt="Azure" />
+                Azure
+              </span>
+            </div>
+          </div>
+
+          <!-- IaC -->
+          <div class="stack-card reveal reveal-delay-2">
+            <p class="stack-category">Infrastructure as Code</p>
+            <div class="stack-tools">
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" />
+                Terraform
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" alt="Ansible" />
+                Ansible
+              </span>
+            </div>
+          </div>
+
+          <!-- Containerization -->
+          <div class="stack-card reveal reveal-delay-3">
+            <p class="stack-category">Containerization</p>
+            <div class="stack-tools">
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" />
+                Kubernetes
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" />
+                Docker
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/helm/helm-original.svg" alt="Helm" />
+                Helm
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original.svg" alt="ArgoCD" />
+                ArgoCD
+              </span>
+            </div>
+          </div>
+
+          <!-- CI/CD -->
+          <div class="stack-card reveal reveal-delay-1">
+            <p class="stack-category">CI/CD</p>
+            <div class="stack-tools">
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub Actions" />
+                GitHub Actions
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" alt="Jenkins" />
+                Jenkins
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuredevops/azuredevops-original.svg" alt="Azure DevOps" />
+                Azure DevOps
+              </span>
+            </div>
+          </div>
+
+          <!-- Monitoring -->
+          <div class="stack-card reveal reveal-delay-2">
+            <p class="stack-category">Monitoring</p>
+            <div class="stack-tools">
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg" alt="Prometheus" />
+                Prometheus
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg" alt="Grafana" />
+                Grafana
+              </span>
+              <span class="tool-chip">ELK Stack</span>
+            </div>
+          </div>
+
+          <!-- DevSecOps -->
+          <div class="stack-card reveal reveal-delay-3">
+            <p class="stack-category">DevSecOps</p>
+            <div class="stack-tools">
+              <span class="tool-chip">IAM</span>
+              <span class="tool-chip">RBAC</span>
+              <span class="tool-chip">Secrets Management</span>
+              <span class="tool-chip">Security Scanning</span>
+            </div>
+          </div>
+
+          <!-- Programming -->
+          <div class="stack-card reveal reveal-delay-1">
+            <p class="stack-category">Programming &amp; Scripting</p>
+            <div class="stack-tools">
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" />
+                Python
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" alt="Bash" />
+                Bash
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" />
+                Linux
+              </span>
+              <span class="tool-chip">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" />
+                Git
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROJECTS ═══ -->
+    <section id="projects" aria-label="Projects">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label">Work</p>
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">Work that shipped.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 01 -->
+          <article class="project-card reveal reveal-delay-1">
+            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
+            <span class="project-number">Project 01</span>
+            <h3 class="project-title">End-to-End CI/CD Pipeline with Jenkins</h3>
+            <p class="project-desc">Every manual deployment is a risk. I designed and implemented a fully automated pipeline from code commit to production, covering build, test, security scan, and rollback. Teams went from deploying once a week to shipping multiple times a day with confidence.</p>
+            <div class="project-tags">
+              <span class="project-tag">Jenkins</span>
+              <span class="project-tag">Docker</span>
+              <span class="project-tag">Security Scanning</span>
+              <span class="project-tag">CI/CD</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link" aria-label="View CI/CD Pipeline project">
+                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 02 -->
+          <article class="project-card reveal reveal-delay-2">
+            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
+            <span class="project-number">Project 02</span>
+            <h3 class="project-title">Infrastructure Automation with Terraform on AWS EKS</h3>
+            <p class="project-desc">Provisioning infrastructure manually is slow and error-prone. I built a production-grade EKS cluster and VPC using modular Terraform. Repeatable, team-safe, and deployable in minutes.</p>
+            <div class="project-tags">
+              <span class="project-tag">Terraform</span>
+              <span class="project-tag">AWS</span>
+              <span class="project-tag">EKS</span>
+              <span class="project-tag">IaC</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link" aria-label="View Terraform EKS project">
+                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 03 -->
+          <article class="project-card reveal reveal-delay-1">
+            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
+            <span class="project-number">Project 03</span>
+            <h3 class="project-title">Enterprise Monitoring &amp; Logging Stack</h3>
+            <p class="project-desc">You can't fix what you can't see. I built a centralized observability stack with real-time metrics, log aggregation, and intelligent alerting. Issues are caught before users ever notice.</p>
+            <div class="project-tags">
+              <span class="project-tag">Prometheus</span>
+              <span class="project-tag">Grafana</span>
+              <span class="project-tag">ELK Stack</span>
+              <span class="project-tag">Observability</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link" aria-label="View monitoring stack project">
+                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project 04 -->
+          <article class="project-card reveal reveal-delay-2">
+            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
+            <span class="project-number">Project 04</span>
+            <h3 class="project-title">Automated AWS Cost Optimization with Lambda</h3>
+            <p class="project-desc">Cloud bills grow silently. I built a serverless automation that identifies and removes orphaned AWS resources on a schedule. Hands-off cost management that runs itself.</p>
+            <div class="project-tags">
+              <span class="project-tag">AWS Lambda</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Cost Optimization</span>
+              <span class="project-tag">Serverless</span>
+            </div>
+            <div class="project-footer">
+              <a href="#" class="project-link" aria-label="View cost optimization project">
+                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SERVICES ═══ -->
+    <section id="services" aria-label="Services">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label">What I Do</p>
+          <h2 class="section-title">My Services</h2>
+          <p class="section-subtitle">What I can do for your team.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal reveal-delay-1">
+            <p class="service-number">01</p>
+            <h3 class="service-title">Cloud Infrastructure Design</h3>
+            <p class="service-desc">Cloud environments built on AWS and Azure that scale with your product. Secure, efficient, and right the first time.</p>
+          </div>
+          <div class="service-card reveal reveal-delay-2">
+            <p class="service-number">02</p>
+            <h3 class="service-title">Automation &amp; Infrastructure as Code</h3>
+            <p class="service-desc">I replace manual infrastructure with Terraform and Ansible. Version-controlled, repeatable, and safe for any engineer to run.</p>
+          </div>
+          <div class="service-card reveal reveal-delay-3">
+            <p class="service-number">03</p>
+            <h3 class="service-title">CI/CD Pipeline Engineering</h3>
+            <p class="service-desc">Automated pipelines from commit to production with testing, security scanning, and rollback built in. Your team ships faster, without the fear.</p>
+          </div>
+          <div class="service-card reveal reveal-delay-1">
+            <p class="service-number">04</p>
+            <h3 class="service-title">Container Orchestration</h3>
+            <p class="service-desc">Production-grade Kubernetes environments that are self-healing, observable, and ready for real traffic.</p>
+          </div>
+          <div class="service-card reveal reveal-delay-2">
+            <p class="service-number">05</p>
+            <h3 class="service-title">Monitoring &amp; Observability</h3>
+            <p class="service-desc">Full visibility across metrics, logs, and alerts so your team catches problems before anyone notices.</p>
+          </div>
+          <div class="service-card reveal reveal-delay-3">
+            <p class="service-number">06</p>
+            <h3 class="service-title">Cloud Cost Optimization</h3>
+            <p class="service-desc">I audit your AWS environment, identify waste, and automate cleanup without touching performance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ BLOG ═══ -->
+    <section id="blog" aria-label="Writing">
+      <div class="container">
+        <div class="blog-inner">
+          <div class="reveal">
+            <p class="section-label" style="justify-content:center;">Writing</p>
+            <h2 class="section-title" style="text-align:center;">I write about what I build.</h2>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <div class="medium-badge" style="margin:20px auto 24px;">
+              <span class="medium-dot"></span>
+              Active on Medium
+            </div>
+            <p class="blog-body">Real walkthroughs from real infrastructure work. If you want to see how I think and how I solve problems, my Medium is the best place to start.</p>
+            <a href="https://mary-wangoi.medium.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i class="fa-brands fa-medium" aria-hidden="true"></i>
+              View My Writing on Medium
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact" aria-label="Contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="section-title">Let's work together.</h2>
+          <p class="section-subtitle">Whether you have a project in mind, a role to fill, or just want to talk infrastructure, my inbox is open. I typically respond within 24 hours.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Form -->
+          <div class="reveal reveal-delay-1">
+            <form class="contact-form" id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="Your name" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" placeholder="your@email.com" required autocomplete="email" />
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+              </div>
+              <div class="form-success" id="form-success" role="alert">
+                <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                Message received — I'll get back to you within 24 hours.
+              </div>
+              <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+                Send Message <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Social links -->
+          <div class="contact-links reveal reveal-delay-2">
+            <a href="mailto:mary.wangoi2025@gmail.com" class="contact-card" aria-label="Send email">
+              <span class="contact-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+              <div class="contact-card-info">
+                <div class="contact-card-label">Email</div>
+                <div class="contact-card-value">mary.wangoi2025@gmail.com</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:auto;color:var(--text-muted);font-size:0.75rem;" aria-hidden="true"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/marywangoi/" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="LinkedIn profile">
+              <span class="contact-icon"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
+              <div class="contact-card-info">
+                <div class="contact-card-label">LinkedIn</div>
+                <div class="contact-card-value">linkedin.com/in/marywangoi</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:auto;color:var(--text-muted);font-size:0.75rem;" aria-hidden="true"></i>
+            </a>
+
+            <a href="https://github.com/wangoimwangi" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="GitHub profile">
+              <span class="contact-icon"><i class="fa-brands fa-github" aria-hidden="true"></i></span>
+              <div class="contact-card-info">
+                <div class="contact-card-label">GitHub</div>
+                <div class="contact-card-value">github.com/wangoimwangi</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:auto;color:var(--text-muted);font-size:0.75rem;" aria-hidden="true"></i>
+            </a>
+
+            <a href="https://mary-wangoi.medium.com/" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="Medium profile">
+              <span class="contact-icon"><i class="fa-brands fa-medium" aria-hidden="true"></i></span>
+              <div class="contact-card-info">
+                <div class="contact-card-label">Medium</div>
+                <div class="contact-card-value">mary-wangoi.medium.com</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:auto;color:var(--text-muted);font-size:0.75rem;" aria-hidden="true"></i>
+            </a>
+
+            <a href="https://linktr.ee/wangoimwangi" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="Linktree profile">
+              <span class="contact-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></span>
+              <div class="contact-card-info">
+                <div class="contact-card-label">Linktree</div>
+                <div class="contact-card-value">linktr.ee/wangoimwangi</div>
+              </div>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:auto;color:var(--text-muted);font-size:0.75rem;" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="container footer-inner">
+      <p class="footer-copy">© 2025 <span>Wangoi Mwangi</span>. Built with intention.</p>
+      <div class="footer-socials" role="list">
+        <a href="mailto:mary.wangoi2025@gmail.com" class="footer-social" aria-label="Email" role="listitem">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/marywangoi/" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="LinkedIn" role="listitem">
+          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+        <a href="https://github.com/wangoimwangi" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="GitHub" role="listitem">
+          <i class="fa-brands fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://mary-wangoi.medium.com/" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Medium" role="listitem">
+          <i class="fa-brands fa-medium" aria-hidden="true"></i>
+        </a>
+        <a href="https://linktr.ee/wangoimwangi" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Linktree" role="listitem">
+          <i class="fa-solid fa-link" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <script>
+    'use strict';
+
+    /* ─── Particle Canvas ─────────────────────────────────────────────────── */
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx    = canvas.getContext('2d');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let W, H, particles, animId;
+
+      const PARTICLE_COUNT = prefersReducedMotion ? 0 : 70;
+      const MAX_DIST = 130;
+      const ACCENT   = '0, 212, 255';
+
+      function resize () {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      function createParticles () {
+        particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+          x:  Math.random() * W,
+          y:  Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r:  Math.random() * 1.5 + 0.5,
+          a:  Math.random() * 0.5 + 0.2,
+        }));
+      }
+
+      function draw () {
+        ctx.clearRect(0, 0, W, H);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${ACCENT}, ${p.a})`;
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const q  = particles[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const d  = Math.sqrt(dx * dx + dy * dy);
+            if (d < MAX_DIST) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.strokeStyle = `rgba(${ACCENT}, ${(1 - d / MAX_DIST) * 0.15})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        animId = requestAnimationFrame(draw);
+      }
+
+      function init () {
+        resize();
+        createParticles();
+        if (!prefersReducedMotion) draw();
+      }
+
+      const ro = new ResizeObserver(() => {
+        resize();
+        createParticles();
+      });
+      ro.observe(canvas.parentElement);
+
+      init();
+    }());
+
+    /* ─── Typing Animation ────────────────────────────────────────────────── */
+    (function () {
+      const el      = document.getElementById('hero-tagline');
+      const text    = '"Your team shouldn\'t be afraid to deploy on a Friday."';
+      const cursor  = el.querySelector('.cursor');
+      let   i       = 0;
+      let   started = false;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        el.textContent = text;
+        return;
+      }
+
+      function type () {
+        if (i < text.length) {
+          el.insertBefore(document.createTextNode(text[i]), cursor);
+          i++;
+          setTimeout(type, 38 + Math.random() * 28);
+        }
+      }
+
+      // Start after a short delay
+      setTimeout(type, 900);
+    }());
+
+    /* ─── Scroll Reveal ───────────────────────────────────────────────────── */
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      const io  = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      els.forEach(el => io.observe(el));
+    }());
+
+    /* ─── Active Nav Links ────────────────────────────────────────────────── */
+    (function () {
+      const sections  = document.querySelectorAll('section[id]');
+      const navLinks  = document.querySelectorAll('.nav-link');
+      const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const id = e.target.id;
+            navLinks.forEach(a => {
+              a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+            });
+          }
+        });
+      }, { rootMargin: `-${navHeight}px 0px -55% 0px`, threshold: 0 });
+
+      sections.forEach(s => io.observe(s));
+    }());
+
+    /* ─── Navbar Scroll ───────────────────────────────────────────────────── */
+    (function () {
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+    }());
+
+    /* ─── Hamburger / Mobile Menu ─────────────────────────────────────────── */
+    (function () {
+      const btn   = document.getElementById('hamburger');
+      const menu  = document.getElementById('mobile-menu');
+      const links = menu.querySelectorAll('a');
+
+      function close () {
+        btn.classList.remove('open');
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      btn.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('open', isOpen);
+        btn.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      links.forEach(a => a.addEventListener('click', close));
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') close();
+      });
+    }());
+
+    /* ─── Contact Form ────────────────────────────────────────────────────── */
+    (function () {
+      const form    = document.getElementById('contact-form');
+      const success = document.getElementById('form-success');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name    = form.querySelector('#contact-name').value.trim();
+        const email   = form.querySelector('#contact-email').value.trim();
+        const message = form.querySelector('#contact-message').value.trim();
+
+        if (!name || !email || !message) return;
+
+        const btn = form.querySelector('[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        // Simulate network delay
+        setTimeout(() => {
+          form.reset();
+          success.classList.add('show');
+          btn.style.display = 'none';
+          success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 900);
+      });
+    }());
+
+    /* ─── Back to Top ─────────────────────────────────────────────────────── */
+    (function () {
+      const btn = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 500);
+      }, { passive: true });
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }());
+  </script>
+</body>
+</html>
