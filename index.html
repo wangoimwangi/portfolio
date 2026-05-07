@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Wangoi Mwangi — DevOps Engineer. Cloud infrastructure, CI/CD, Kubernetes, and automation." />
-  <title>Wangoi Mwangi — DevOps Engineer</title>
+  <meta name="description" content="Wangoi Mwangi - DevOps Engineer. Cloud infrastructure, CI/CD, Kubernetes, and automation." />
+  <title>Wangoi Mwangi - DevOps Engineer</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,21 +15,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    /* ─── CSS Custom Properties ──────────────────────────────────────────── */
+    /* CSS Custom Properties */
     :root {
       --bg-primary:    #0a0f1e;
       --bg-secondary:  #0d1526;
       --bg-card:       #111827;
       --bg-card-hover: #141f35;
-      --accent:        #00d4ff;
-      --accent-dim:    rgba(0, 212, 255, 0.12);
-      --accent-glow:   rgba(0, 212, 255, 0.3);
+      --accent:        #38bdf8;
+      --accent-dim:    rgba(56, 189, 248, 0.12);
+      --accent-glow:   rgba(56, 189, 248, 0.3);
       --green:         #00ff88;
       --text-primary:  #f0f4ff;
       --text-secondary:#8b9ab5;
       --text-muted:    #4a5878;
-      --border:        rgba(0, 212, 255, 0.12);
-      --border-hover:  rgba(0, 212, 255, 0.4);
+      --border:        rgba(56, 189, 248, 0.12);
+      --border-hover:  rgba(56, 189, 248, 0.4);
       --font-body:     'Inter', sans-serif;
       --font-heading:  'Space Grotesk', sans-serif;
       --font-mono:     'JetBrains Mono', monospace;
@@ -39,7 +39,7 @@
       --nav-height:    72px;
     }
 
-    /* ─── Reset & Base ───────────────────────────────────────────────────── */
+    /* Reset & Base */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
@@ -66,12 +66,12 @@
       color: var(--bg-primary);
     }
 
-    /* ─── Scrollbar ──────────────────────────────────────────────────────── */
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg-primary); }
     ::-webkit-scrollbar-thumb { background: var(--accent-glow); border-radius: 3px; }
 
-    /* ─── Utility ────────────────────────────────────────────────────────── */
+    /* Utility */
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -117,7 +117,7 @@
 
     section { padding: 100px 0; }
 
-    /* ─── Buttons ────────────────────────────────────────────────────────── */
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -139,7 +139,7 @@
       color: var(--bg-primary);
     }
     .btn-primary:hover {
-      background: #33dcff;
+      background: #7dd3fc;
       transform: translateY(-2px);
       box-shadow: 0 8px 24px var(--accent-glow);
     }
@@ -166,7 +166,7 @@
       transform: translateY(-2px);
     }
 
-    /* ─── Reveal Animation ───────────────────────────────────────────────── */
+    /* Reveal Animation */
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -186,9 +186,7 @@
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       NAVIGATION
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ NAVIGATION ═══ */
     #navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -236,7 +234,6 @@
       padding: 6px 14px;
       border-radius: 6px;
       transition: var(--transition);
-      position: relative;
     }
     .nav-links a:hover,
     .nav-links a.active {
@@ -292,42 +289,53 @@
     }
     .mobile-menu a:hover { color: var(--accent); background: var(--accent-dim); }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ HERO ═══ */
     #home {
       position: relative;
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
       padding: 0;
     }
 
-    /* Canvas background */
-    #hero-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
+    .hero-split {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
     }
 
-    /* Gradient overlay */
-    #home::after {
+    .hero-visual {
+      width: 40%;
+      position: relative;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .hero-visual::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,212,255,0.06) 0%, transparent 70%);
+      top: 0; right: 0; bottom: 0;
+      width: 120px;
+      background: linear-gradient(to right, transparent, var(--bg-primary));
       z-index: 1;
       pointer-events: none;
     }
 
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
     .hero-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 80px 80px 40px;
       position: relative;
       z-index: 2;
-      text-align: center;
-      max-width: 820px;
-      padding: 0 24px;
     }
 
     .hero-eyebrow {
@@ -342,7 +350,7 @@
 
     .hero-name {
       font-family: var(--font-heading);
-      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-size: clamp(2.5rem, 5vw, 5rem);
       font-weight: 700;
       line-height: 1;
       letter-spacing: -0.03em;
@@ -356,7 +364,7 @@
 
     .hero-title {
       font-family: var(--font-heading);
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
       font-weight: 500;
       color: var(--text-secondary);
       letter-spacing: 0.08em;
@@ -366,7 +374,7 @@
 
     .hero-tagline {
       font-family: var(--font-mono);
-      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
       color: var(--text-primary);
       margin-bottom: 48px;
       min-height: 2em;
@@ -390,7 +398,6 @@
     .hero-ctas {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
     }
@@ -418,9 +425,7 @@
       50%       { transform: translateX(-50%) translateY(8px); }
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       ABOUT
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ ABOUT ═══ */
     #about { background: var(--bg-secondary); }
 
     .about-grid {
@@ -450,6 +455,7 @@
       justify-content: center;
       position: relative;
       flex-shrink: 0;
+      overflow: hidden;
     }
     .about-avatar::before {
       content: '';
@@ -469,36 +475,17 @@
       z-index: -1;
     }
 
+    .about-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
     @keyframes rotate {
       to { transform: rotate(360deg); }
-    }
-
-    .avatar-initials {
-      font-family: var(--font-heading);
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: -0.02em;
-    }
-
-    .about-stats {
-      display: flex;
-      gap: 32px;
-    }
-    .stat {
-      text-align: center;
-    }
-    .stat-number {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 4px;
     }
 
     .about-text .section-header { margin-bottom: 28px; }
@@ -511,9 +498,7 @@
     }
     .about-body p:last-child { margin-bottom: 32px; }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       TECH STACK
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ TECH STACK ═══ */
     #tech-stack { background: var(--bg-primary); }
 
     .stack-grid {
@@ -574,14 +559,12 @@
       object-fit: contain;
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       PROJECTS
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ PROJECTS ═══ */
     #projects { background: var(--bg-secondary); }
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
 
@@ -589,21 +572,38 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 36px;
       position: relative;
       transition: var(--transition);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      overflow: hidden;
+      padding: 0;
     }
     .project-card:hover {
       border-color: var(--border-hover);
       transform: translateY(-6px);
       box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px var(--border-hover);
     }
-    .project-card:hover .project-link-icon {
-      opacity: 1;
-      transform: translate(0, 0);
+
+    .project-visual {
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+      display: block;
+      flex-shrink: 0;
+    }
+    .project-visual svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .project-card-inner {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
     }
 
     .project-number {
@@ -615,7 +615,7 @@
 
     .project-title {
       font-family: var(--font-heading);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--text-primary);
       line-height: 1.3;
@@ -625,116 +625,83 @@
       color: var(--text-secondary);
       font-size: 0.925rem;
       line-height: 1.75;
-      flex: 1;
     }
 
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .project-tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      padding: 4px 10px;
-      background: var(--accent-dim);
-      color: var(--accent);
-      border-radius: 4px;
-      letter-spacing: 0.05em;
-    }
-
-    .project-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      padding-top: 8px;
-    }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--accent);
-      transition: var(--transition);
-    }
-    .project-link:hover { gap: 10px; }
-
-    .project-link-icon {
-      position: absolute;
-      top: 28px;
-      right: 28px;
-      color: var(--text-muted);
-      font-size: 1rem;
-      opacity: 0;
-      transform: translate(-4px, 4px);
-      transition: var(--transition);
-    }
-
-    /* ═══════════════════════════════════════════════════════════════════════
-       SERVICES
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ SERVICES ═══ */
     #services { background: var(--bg-primary); }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    .services-list {
+      display: flex;
+      flex-direction: column;
     }
 
-    .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      transition: var(--transition);
+    .service-item {
+      display: grid;
+      grid-template-columns: 80px 1px 1fr;
+      gap: 0 40px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
       position: relative;
-      overflow: hidden;
+      transition: var(--transition);
+      align-items: center;
     }
-    .service-card::before {
+    .service-item:first-child { border-top: 1px solid var(--border); }
+
+    .service-item::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
+      bottom: -1px;
+      left: 0;
+      height: 1px;
+      width: 0;
       background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0;
-      transition: var(--transition);
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .service-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-    }
-    .service-card:hover::before { opacity: 1; }
+    .service-item:hover::after { width: 100%; }
 
-    .service-number {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      letter-spacing: 0.12em;
-      margin-bottom: 14px;
-    }
-
-    .service-title {
+    .service-num-large {
       font-family: var(--font-heading);
-      font-size: 1.05rem;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.15;
+      line-height: 1;
+      transition: opacity var(--transition);
+      text-align: right;
+    }
+    .service-item:hover .service-num-large { opacity: 0.5; }
+
+    .service-divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--border);
+      min-height: 48px;
+      transition: background var(--transition);
+    }
+    .service-item:hover .service-divider { background: var(--border-hover); }
+
+    .service-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .service-body-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 12px;
-      line-height: 1.3;
+      transition: color var(--transition);
     }
+    .service-item:hover .service-body-title { color: var(--accent); }
 
-    .service-desc {
+    .service-body-desc {
+      font-size: 0.9rem;
       color: var(--text-secondary);
-      font-size: 0.875rem;
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       BLOG
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ BLOG ═══ */
     #blog {
       background: var(--bg-secondary);
       position: relative;
@@ -794,9 +761,7 @@
       50% { box-shadow: 0 0 0 6px rgba(0,255,136,0); }
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ CONTACT ═══ */
     #contact { background: var(--bg-primary); }
 
     .contact-grid {
@@ -913,9 +878,7 @@
     }
     .contact-card:hover .contact-card-value { color: var(--accent); }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ FOOTER ═══ */
     footer {
       background: var(--bg-secondary);
       border-top: 1px solid var(--border);
@@ -960,7 +923,7 @@
       transform: translateY(-2px);
     }
 
-    /* ─── Back to Top ────────────────────────────────────────────────────── */
+    /* Back to Top */
     #back-to-top {
       position: fixed;
       bottom: 28px;
@@ -988,42 +951,79 @@
       pointer-events: auto;
     }
     #back-to-top:hover {
-      background: #33dcff;
+      background: #7dd3fc;
       box-shadow: 0 8px 24px var(--accent-glow);
     }
 
-    /* ═══════════════════════════════════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════════════════════════════════ */
+    /* ═══ RESPONSIVE ═══ */
     @media (max-width: 900px) {
-      .about-grid    { grid-template-columns: 1fr; gap: 48px; }
-      .about-avatar-wrap { position: static; flex-direction: row; align-items: center; justify-content: flex-start; }
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-avatar-wrap { position: static; align-items: center; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
       .projects-grid { grid-template-columns: 1fr; }
-      .contact-grid  { grid-template-columns: 1fr; gap: 48px; }
     }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .hamburger  { display: flex; }
+      .hamburger { display: flex; }
       section { padding: 72px 0; }
-      .about-stats { gap: 24px; }
-      .services-grid { grid-template-columns: 1fr; }
       .stack-grid { grid-template-columns: 1fr; }
+
+      /* Hero split - stack vertically on mobile */
+      .hero-split { flex-direction: column; }
+      .hero-visual {
+        width: 100%;
+        min-height: 220px;
+        max-height: 260px;
+        flex-shrink: 0;
+      }
+      .hero-visual::after {
+        top: auto; right: 0; bottom: 0; left: 0;
+        width: auto;
+        height: 80px;
+        background: linear-gradient(to bottom, transparent, var(--bg-primary));
+      }
+      .hero-content {
+        padding: 32px 24px 80px;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-ctas { justify-content: center; }
+      .hero-tagline { text-align: center; }
+
+      /* Services list - compress on tablet */
+      .service-item {
+        grid-template-columns: 60px 1px 1fr;
+        gap: 0 24px;
+        padding: 28px 0;
+      }
+      .service-num-large { font-size: 2.2rem; }
     }
 
     @media (max-width: 480px) {
-      .about-avatar { width: 160px; height: 160px; }
-      .avatar-initials { font-size: 2.2rem; }
+      .about-avatar { width: 180px; height: 180px; }
       .hero-ctas { flex-direction: column; align-items: stretch; }
       .hero-ctas .btn { justify-content: center; }
       .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+
+      /* Services - single column */
+      .service-item {
+        grid-template-columns: 1fr;
+        gap: 12px 0;
+        padding: 24px 0;
+      }
+      .service-divider { display: none; }
+      .service-num-large {
+        font-size: 1.6rem;
+        opacity: 0.4;
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══ NAVIGATION ═══ -->
+  <!-- NAVIGATION -->
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container nav-inner">
       <a href="#home" class="nav-logo">Wangoi<span>.</span></a>
@@ -1056,24 +1056,31 @@
   </div>
 
   <main>
-    <!-- ═══ HERO ═══ -->
+    <!-- HERO -->
     <section id="home" aria-label="Hero">
-      <canvas id="hero-canvas" aria-hidden="true"></canvas>
-      <div class="hero-content">
-        <p class="hero-eyebrow">DevOps Engineer</p>
-        <h1 class="hero-name">Wangoi Mwangi<span class="period">.</span></h1>
-        <p class="hero-title">Infrastructure &nbsp;·&nbsp; Automation &nbsp;·&nbsp; Reliability</p>
-        <p class="hero-tagline" id="hero-tagline" aria-live="polite"><span class="cursor"></span></p>
-        <div class="hero-ctas">
-          <a href="#projects" class="btn btn-primary">
-            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i> View My Work
-          </a>
-          <a href="#" class="btn btn-outline" download>
-            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV
-          </a>
-          <a href="#contact" class="btn btn-ghost">
-            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Let's Talk
-          </a>
+      <div class="hero-split">
+        <!-- Left: Animation panel (40%) -->
+        <div class="hero-visual">
+          <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        </div>
+
+        <!-- Right: Content (60%) -->
+        <div class="hero-content">
+          <p class="hero-eyebrow">DevOps Engineer</p>
+          <h1 class="hero-name">Wangoi Mwangi<span class="period">.</span></h1>
+          <p class="hero-title">Infrastructure &nbsp;·&nbsp; Automation &nbsp;·&nbsp; Reliability</p>
+          <p class="hero-tagline" id="hero-tagline" aria-live="polite"><span class="cursor"></span></p>
+          <div class="hero-ctas">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fa-solid fa-arrow-down" aria-hidden="true"></i> View My Work
+            </a>
+            <a href="#" class="btn btn-outline" download>
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV
+            </a>
+            <a href="#contact" class="btn btn-ghost">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Let's Talk
+            </a>
+          </div>
         </div>
       </div>
       <div class="hero-scroll" aria-hidden="true">
@@ -1082,28 +1089,14 @@
       </div>
     </section>
 
-    <!-- ═══ ABOUT ═══ -->
+    <!-- ABOUT -->
     <section id="about" aria-label="About">
       <div class="container">
         <div class="about-grid">
-          <!-- Left: Avatar -->
+          <!-- Left: Photo -->
           <div class="about-avatar-wrap reveal">
-            <div class="about-avatar" aria-hidden="true">
-              <span class="avatar-initials">WM</span>
-            </div>
-            <div class="about-stats">
-              <div class="stat">
-                <div class="stat-number">5+</div>
-                <div class="stat-label">Years</div>
-              </div>
-              <div class="stat">
-                <div class="stat-number">20+</div>
-                <div class="stat-label">Projects</div>
-              </div>
-              <div class="stat">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Clouds</div>
-              </div>
+            <div class="about-avatar">
+              <img src="profile.jpg" alt="Wangoi Mwangi - DevOps Engineer" />
             </div>
           </div>
 
@@ -1114,7 +1107,7 @@
               <h2 class="section-title">I'm Wangoi Mwangi, a DevOps Engineer who builds infrastructure that teams rely on.</h2>
             </div>
             <div class="about-body reveal reveal-delay-2">
-              <p>I've always believed the best infrastructure is the kind you don't have to think about. Secure, scalable, quietly doing its job — and getting there is exactly the kind of work I enjoy.</p>
+              <p>I've always believed the best infrastructure is the kind you don't have to think about. Secure, scalable, quietly doing its job - and getting there is exactly the kind of work I enjoy.</p>
               <p>I've worked with startups moving fast, enterprises that can't afford downtime, and remote teams spread across time zones. The context changes, the standards don't.</p>
               <p>If something here resonates with you, let's talk.</p>
               <a href="#contact" class="btn btn-primary">
@@ -1126,7 +1119,7 @@
       </div>
     </section>
 
-    <!-- ═══ TECH STACK ═══ -->
+    <!-- TECH STACK -->
     <section id="tech-stack" aria-label="Tech Stack">
       <div class="container">
         <div class="section-header reveal">
@@ -1184,7 +1177,7 @@
               </span>
               <span class="tool-chip">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original.svg" alt="ArgoCD" />
-                ArgoCD
+                ArgoCD (GitOps)
               </span>
             </div>
           </div>
@@ -1261,7 +1254,7 @@
       </div>
     </section>
 
-    <!-- ═══ PROJECTS ═══ -->
+    <!-- PROJECTS -->
     <section id="projects" aria-label="Projects">
       <div class="container">
         <div class="section-header reveal">
@@ -1271,86 +1264,200 @@
         </div>
 
         <div class="projects-grid">
+
           <!-- Project 01 -->
           <article class="project-card reveal reveal-delay-1">
-            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
-            <span class="project-number">Project 01</span>
-            <h3 class="project-title">End-to-End CI/CD Pipeline with Jenkins</h3>
-            <p class="project-desc">Every manual deployment is a risk. I designed and implemented a fully automated pipeline from code commit to production, covering build, test, security scan, and rollback. Teams went from deploying once a week to shipping multiple times a day with confidence.</p>
-            <div class="project-tags">
-              <span class="project-tag">Jenkins</span>
-              <span class="project-tag">Docker</span>
-              <span class="project-tag">Security Scanning</span>
-              <span class="project-tag">CI/CD</span>
+            <div class="project-visual">
+              <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="400" height="150" fill="#060b18"/>
+                <path d="M0 25 H400 M0 50 H400 M0 75 H400 M0 100 H400 M0 125 H400 M25 0 V150 M50 0 V150 M75 0 V150 M100 0 V150 M125 0 V150 M150 0 V150 M175 0 V150 M200 0 V150 M225 0 V150 M250 0 V150 M275 0 V150 M300 0 V150 M325 0 V150 M350 0 V150 M375 0 V150" stroke="rgba(56,189,248,0.05)" stroke-width="0.5"/>
+                <line x1="128" y1="75" x2="272" y2="75" stroke="rgba(56,189,248,0.4)" stroke-width="1.5" stroke-dasharray="6 4"/>
+                <circle cx="90" cy="75" r="34" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.35)" stroke-width="1.5"/>
+                <text x="90" y="71" text-anchor="middle" fill="rgba(56,189,248,0.85)" font-size="10" font-family="monospace" font-weight="600">AWS</text>
+                <text x="90" y="85" text-anchor="middle" fill="rgba(56,189,248,0.4)" font-size="8" font-family="monospace">cloud</text>
+                <circle cx="310" cy="75" r="34" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.35)" stroke-width="1.5"/>
+                <text x="310" y="71" text-anchor="middle" fill="rgba(56,189,248,0.85)" font-size="10" font-family="monospace" font-weight="600">Azure</text>
+                <text x="310" y="85" text-anchor="middle" fill="rgba(56,189,248,0.4)" font-size="8" font-family="monospace">cloud</text>
+                <polygon points="200,57 214,75 200,93 186,75" fill="rgba(56,189,248,0.15)" stroke="rgba(56,189,248,0.65)" stroke-width="1.5"/>
+                <text x="200" y="79" text-anchor="middle" fill="rgba(56,189,248,0.9)" font-size="8" font-family="monospace" font-weight="600">tf</text>
+                <circle cx="55" cy="36" r="9" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+                <line x1="63" y1="43" x2="69" y2="52" stroke="rgba(56,189,248,0.2)" stroke-width="1" stroke-dasharray="3 2"/>
+                <circle cx="55" cy="114" r="9" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+                <line x1="63" y1="107" x2="69" y2="98" stroke="rgba(56,189,248,0.2)" stroke-width="1" stroke-dasharray="3 2"/>
+                <circle cx="345" cy="36" r="9" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+                <line x1="337" y1="43" x2="331" y2="52" stroke="rgba(56,189,248,0.2)" stroke-width="1" stroke-dasharray="3 2"/>
+                <circle cx="345" cy="114" r="9" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+                <line x1="337" y1="107" x2="331" y2="98" stroke="rgba(56,189,248,0.2)" stroke-width="1" stroke-dasharray="3 2"/>
+                <circle cx="160" cy="75" r="3" fill="rgba(56,189,248,0.7)"/>
+                <circle cx="240" cy="75" r="3" fill="rgba(56,189,248,0.7)"/>
+              </svg>
             </div>
-            <div class="project-footer">
-              <a href="#" class="project-link" aria-label="View CI/CD Pipeline project">
-                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </a>
+            <div class="project-card-inner">
+              <span class="project-number">01</span>
+              <h3 class="project-title">Multi-Cloud Infrastructure with Terraform</h3>
+              <p class="project-desc">Designed and deployed modular cloud infrastructure across AWS and Azure using Terraform. Remote state, environment isolation and reusable modules - built for teams, not just individuals.</p>
             </div>
           </article>
 
           <!-- Project 02 -->
           <article class="project-card reveal reveal-delay-2">
-            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
-            <span class="project-number">Project 02</span>
-            <h3 class="project-title">Infrastructure Automation with Terraform on AWS EKS</h3>
-            <p class="project-desc">Provisioning infrastructure manually is slow and error-prone. I built a production-grade EKS cluster and VPC using modular Terraform. Repeatable, team-safe, and deployable in minutes.</p>
-            <div class="project-tags">
-              <span class="project-tag">Terraform</span>
-              <span class="project-tag">AWS</span>
-              <span class="project-tag">EKS</span>
-              <span class="project-tag">IaC</span>
+            <div class="project-visual">
+              <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="400" height="150" fill="#060b18"/>
+                <path d="M0 25 H400 M0 50 H400 M0 75 H400 M0 100 H400 M0 125 H400 M25 0 V150 M50 0 V150 M75 0 V150 M100 0 V150 M125 0 V150 M150 0 V150 M175 0 V150 M200 0 V150 M225 0 V150 M250 0 V150 M275 0 V150 M300 0 V150 M325 0 V150 M350 0 V150 M375 0 V150" stroke="rgba(56,189,248,0.05)" stroke-width="0.5"/>
+                <line x1="200" y1="75" x2="200" y2="22" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <line x1="200" y1="75" x2="200" y2="128" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <line x1="200" y1="75" x2="153" y2="48" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <line x1="200" y1="75" x2="247" y2="48" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <line x1="200" y1="75" x2="153" y2="102" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <line x1="200" y1="75" x2="247" y2="102" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <polygon points="200,8 211,15 211,29 200,36 189,29 189,15" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="200" y="26" text-anchor="middle" fill="rgba(56,189,248,0.7)" font-size="7" font-family="monospace">pod</text>
+                <polygon points="200,114 211,121 211,135 200,142 189,135 189,121" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="200" y="132" text-anchor="middle" fill="rgba(56,189,248,0.7)" font-size="7" font-family="monospace">pod</text>
+                <polygon points="139,34 150,41 150,55 139,62 128,55 128,41" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="139" y="52" text-anchor="middle" fill="rgba(56,189,248,0.7)" font-size="7" font-family="monospace">pod</text>
+                <polygon points="261,34 272,41 272,55 261,62 250,55 250,41" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="261" y="52" text-anchor="middle" fill="rgba(56,189,248,0.7)" font-size="7" font-family="monospace">pod</text>
+                <polygon points="139,88 150,95 150,109 139,116 128,109 128,95" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="139" y="106" text-anchor="middle" fill="rgba(56,189,248,0.7)" font-size="7" font-family="monospace">pod</text>
+                <polygon points="261,88 272,95 272,109 261,116 250,109 250,95" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="261" y="106" text-anchor="middle" fill="rgba(56,189,248,0.7)" font-size="7" font-family="monospace">pod</text>
+                <circle cx="200" cy="75" r="22" fill="rgba(56,189,248,0.15)" stroke="rgba(56,189,248,0.65)" stroke-width="2"/>
+                <text x="200" y="79" text-anchor="middle" fill="rgba(56,189,248,1)" font-size="11" font-family="monospace" font-weight="700">K8s</text>
+              </svg>
             </div>
-            <div class="project-footer">
-              <a href="#" class="project-link" aria-label="View Terraform EKS project">
-                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </a>
+            <div class="project-card-inner">
+              <span class="project-number">02</span>
+              <h3 class="project-title">Production Kubernetes Platform</h3>
+              <p class="project-desc">Provisioned and managed a production-grade EKS cluster with autoscaling node groups, Helm-based deployments and namespace isolation. Zero manual intervention after setup.</p>
             </div>
           </article>
 
           <!-- Project 03 -->
           <article class="project-card reveal reveal-delay-1">
-            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
-            <span class="project-number">Project 03</span>
-            <h3 class="project-title">Enterprise Monitoring &amp; Logging Stack</h3>
-            <p class="project-desc">You can't fix what you can't see. I built a centralized observability stack with real-time metrics, log aggregation, and intelligent alerting. Issues are caught before users ever notice.</p>
-            <div class="project-tags">
-              <span class="project-tag">Prometheus</span>
-              <span class="project-tag">Grafana</span>
-              <span class="project-tag">ELK Stack</span>
-              <span class="project-tag">Observability</span>
+            <div class="project-visual">
+              <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="400" height="150" fill="#060b18"/>
+                <path d="M0 37 H400 M0 75 H400 M0 113 H400 M50 0 V150 M100 0 V150 M150 0 V150 M200 0 V150 M250 0 V150 M300 0 V150 M350 0 V150" stroke="rgba(56,189,248,0.05)" stroke-width="0.5"/>
+                <line x1="15" y1="75" x2="385" y2="75" stroke="rgba(56,189,248,0.1)" stroke-width="1"/>
+                <rect x="12" y="52" width="72" height="46" rx="6" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="48" y="70" text-anchor="middle" fill="rgba(56,189,248,0.55)" font-size="7" font-family="monospace">BUILD</text>
+                <text x="48" y="87" text-anchor="middle" fill="rgba(56,189,248,0.9)" font-size="12" font-family="sans-serif">⚙</text>
+                <polygon points="86,70 98,75 86,80" fill="rgba(56,189,248,0.55)"/>
+                <rect x="100" y="52" width="72" height="46" rx="6" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="136" y="70" text-anchor="middle" fill="rgba(56,189,248,0.55)" font-size="7" font-family="monospace">TEST</text>
+                <text x="136" y="87" text-anchor="middle" fill="rgba(56,189,248,0.9)" font-size="13" font-family="sans-serif">✓</text>
+                <polygon points="174,70 186,75 174,80" fill="rgba(56,189,248,0.55)"/>
+                <rect x="188" y="52" width="72" height="46" rx="6" fill="rgba(56,189,248,0.1)" stroke="rgba(56,189,248,0.4)" stroke-width="1.5"/>
+                <text x="224" y="70" text-anchor="middle" fill="rgba(56,189,248,0.55)" font-size="7" font-family="monospace">SCAN</text>
+                <text x="224" y="87" text-anchor="middle" fill="rgba(56,189,248,0.9)" font-size="11" font-family="sans-serif">🛡</text>
+                <polygon points="262,70 274,75 262,80" fill="rgba(56,189,248,0.55)"/>
+                <rect x="276" y="52" width="112" height="46" rx="6" fill="rgba(56,189,248,0.18)" stroke="rgba(56,189,248,0.65)" stroke-width="2"/>
+                <text x="332" y="70" text-anchor="middle" fill="rgba(56,189,248,0.7)" font-size="7" font-family="monospace">DEPLOY</text>
+                <text x="332" y="87" text-anchor="middle" fill="rgba(56,189,248,1)" font-size="12" font-family="sans-serif">▶</text>
+                <circle cx="12" cy="75" r="3" fill="rgba(56,189,248,0.8)"/>
+                <circle cx="388" cy="75" r="4" fill="rgba(56,189,248,0.9)"/>
+                <text x="18" y="120" fill="rgba(56,189,248,0.25)" font-size="7" font-family="monospace">commit</text>
+                <text x="340" y="120" fill="rgba(56,189,248,0.25)" font-size="7" font-family="monospace">prod</text>
+              </svg>
             </div>
-            <div class="project-footer">
-              <a href="#" class="project-link" aria-label="View monitoring stack project">
-                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </a>
+            <div class="project-card-inner">
+              <span class="project-number">03</span>
+              <h3 class="project-title">Automated CI/CD Pipeline</h3>
+              <p class="project-desc">Built an automated pipeline from commit to production. Covers build, test, security scan and rollback. Teams deploy multiple times a day without the fear.</p>
             </div>
           </article>
 
           <!-- Project 04 -->
           <article class="project-card reveal reveal-delay-2">
-            <i class="fa-solid fa-arrow-up-right-from-square project-link-icon" aria-hidden="true"></i>
-            <span class="project-number">Project 04</span>
-            <h3 class="project-title">Automated AWS Cost Optimization with Lambda</h3>
-            <p class="project-desc">Cloud bills grow silently. I built a serverless automation that identifies and removes orphaned AWS resources on a schedule. Hands-off cost management that runs itself.</p>
-            <div class="project-tags">
-              <span class="project-tag">AWS Lambda</span>
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Cost Optimization</span>
-              <span class="project-tag">Serverless</span>
+            <div class="project-visual">
+              <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="400" height="150" fill="#060b18"/>
+                <path d="M0 30 H400 M0 60 H400 M0 90 H400 M0 120 H400 M40 0 V150 M80 0 V150 M120 0 V150 M160 0 V150 M200 0 V150 M240 0 V150 M280 0 V150 M320 0 V150 M360 0 V150" stroke="rgba(56,189,248,0.05)" stroke-width="0.5"/>
+                <polyline points="10,105 55,82 100,92 145,52 190,72 235,42 280,62 325,47 370,32 400,28" stroke="rgba(56,189,248,0.7)" stroke-width="2" fill="none"/>
+                <path d="M10,105 55,82 100,92 145,52 190,72 235,42 280,62 325,47 370,32 400,28 L400,135 L10,135 Z" fill="rgba(56,189,248,0.05)"/>
+                <line x1="10" y1="58" x2="400" y2="58" stroke="rgba(255,90,90,0.25)" stroke-width="1" stroke-dasharray="6 4"/>
+                <text x="14" y="54" fill="rgba(255,90,90,0.45)" font-size="7" font-family="monospace">threshold</text>
+                <circle cx="235" cy="42" r="5" fill="rgba(56,189,248,1)"/>
+                <circle cx="235" cy="42" r="10" fill="rgba(56,189,248,0.2)" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+                <rect x="10" y="120" width="80" height="22" rx="4" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <text x="50" y="134" text-anchor="middle" fill="rgba(56,189,248,0.5)" font-size="6.5" font-family="monospace">Prometheus</text>
+                <rect x="98" y="120" width="70" height="22" rx="4" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <text x="133" y="134" text-anchor="middle" fill="rgba(56,189,248,0.5)" font-size="6.5" font-family="monospace">Grafana</text>
+                <rect x="176" y="120" width="56" height="22" rx="4" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <text x="204" y="134" text-anchor="middle" fill="rgba(56,189,248,0.5)" font-size="6.5" font-family="monospace">ELK</text>
+                <rect x="240" y="120" width="100" height="22" rx="4" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.2)" stroke-width="1"/>
+                <text x="290" y="134" text-anchor="middle" fill="rgba(56,189,248,0.5)" font-size="6.5" font-family="monospace">CloudWatch</text>
+              </svg>
             </div>
-            <div class="project-footer">
-              <a href="#" class="project-link" aria-label="View cost optimization project">
-                View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-              </a>
+            <div class="project-card-inner">
+              <span class="project-number">04</span>
+              <h3 class="project-title">Enterprise Observability Stack</h3>
+              <p class="project-desc">Deployed a full observability platform - Prometheus, Grafana, ELK Stack and CloudWatch. Real-time alerts, log aggregation and dashboards. Issues caught before users notice.</p>
             </div>
           </article>
+
+          <!-- Project 05 -->
+          <article class="project-card reveal reveal-delay-1">
+            <div class="project-visual">
+              <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="400" height="150" fill="#060b18"/>
+                <path d="M0 30 H400 M0 60 H400 M0 90 H400 M0 120 H400 M40 0 V150 M80 0 V150 M120 0 V150 M160 0 V150 M200 0 V150 M240 0 V150 M280 0 V150 M320 0 V150 M360 0 V150" stroke="rgba(56,189,248,0.05)" stroke-width="0.5"/>
+                <text x="30" y="110" fill="rgba(56,189,248,0.3)" font-size="80" font-family="monospace" font-weight="300">λ</text>
+                <text x="175" y="28" fill="rgba(56,189,248,0.4)" font-size="8" font-family="monospace">cost reduction</text>
+                <rect x="175" y="40" width="36" height="85" rx="4" fill="rgba(56,189,248,0.22)" stroke="rgba(56,189,248,0.4)" stroke-width="1"/>
+                <rect x="221" y="56" width="36" height="69" rx="4" fill="rgba(56,189,248,0.17)" stroke="rgba(56,189,248,0.35)" stroke-width="1"/>
+                <rect x="267" y="74" width="36" height="51" rx="4" fill="rgba(56,189,248,0.12)" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+                <rect x="313" y="96" width="36" height="29" rx="4" fill="rgba(56,189,248,0.08)" stroke="rgba(56,189,248,0.25)" stroke-width="1"/>
+                <polyline points="193,40 239,56 285,74 331,96" stroke="rgba(56,189,248,0.5)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+                <text x="355" y="90" fill="rgba(0,255,136,0.6)" font-size="9" font-family="monospace">-40%</text>
+                <text x="18" y="140" fill="rgba(56,189,248,0.2)" font-size="7" font-family="monospace">runs on schedule - hands-off cleanup</text>
+              </svg>
+            </div>
+            <div class="project-card-inner">
+              <span class="project-number">05</span>
+              <h3 class="project-title">Cloud Cost Optimisation Engine</h3>
+              <p class="project-desc">Built a serverless automation using Python and Lambda that identifies and removes orphaned AWS resources on a schedule. Hands-off cost management that runs itself.</p>
+            </div>
+          </article>
+
+          <!-- Project 06 -->
+          <article class="project-card reveal reveal-delay-2">
+            <div class="project-visual">
+              <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="400" height="150" fill="#060b18"/>
+                <path d="M0 30 H400 M0 60 H400 M0 90 H400 M0 120 H400 M40 0 V150 M80 0 V150 M120 0 V150 M160 0 V150 M200 0 V150 M240 0 V150 M280 0 V150 M320 0 V150 M360 0 V150" stroke="rgba(56,189,248,0.05)" stroke-width="0.5"/>
+                <path d="M110 18 L160 33 L160 90 Q160 125 110 140 Q60 125 60 90 L60 33 Z" fill="rgba(56,189,248,0.09)" stroke="rgba(56,189,248,0.5)" stroke-width="2"/>
+                <rect x="88" y="72" width="44" height="34" rx="5" fill="rgba(56,189,248,0.15)" stroke="rgba(56,189,248,0.5)" stroke-width="1.5"/>
+                <path d="M97 72 L97 62 Q97 50 110 50 Q123 50 123 62 L123 72" stroke="rgba(56,189,248,0.65)" stroke-width="2" fill="none"/>
+                <circle cx="110" cy="87" r="5" fill="rgba(56,189,248,0.9)"/>
+                <text x="195" y="38" fill="rgba(56,189,248,0.7)" font-size="8" font-family="monospace">IAM least-privilege</text>
+                <line x1="195" y1="44" x2="390" y2="44" stroke="rgba(56,189,248,0.12)" stroke-width="1"/>
+                <text x="195" y="64" fill="rgba(56,189,248,0.6)" font-size="8" font-family="monospace">secrets management</text>
+                <line x1="195" y1="70" x2="390" y2="70" stroke="rgba(56,189,248,0.12)" stroke-width="1"/>
+                <text x="195" y="90" fill="rgba(56,189,248,0.55)" font-size="8" font-family="monospace">security scanning</text>
+                <line x1="195" y1="96" x2="390" y2="96" stroke="rgba(56,189,248,0.12)" stroke-width="1"/>
+                <text x="195" y="116" fill="rgba(56,189,248,0.45)" font-size="8" font-family="monospace">RBAC · SAST · DAST</text>
+                <line x1="195" y1="122" x2="390" y2="122" stroke="rgba(56,189,248,0.12)" stroke-width="1"/>
+                <text x="182" y="38" fill="rgba(0,255,136,0.6)" font-size="8" font-family="monospace">✓</text>
+                <text x="182" y="64" fill="rgba(0,255,136,0.6)" font-size="8" font-family="monospace">✓</text>
+                <text x="182" y="90" fill="rgba(0,255,136,0.6)" font-size="8" font-family="monospace">✓</text>
+                <text x="182" y="116" fill="rgba(0,255,136,0.6)" font-size="8" font-family="monospace">✓</text>
+              </svg>
+            </div>
+            <div class="project-card-inner">
+              <span class="project-number">06</span>
+              <h3 class="project-title">DevSecOps Pipeline Integration</h3>
+              <p class="project-desc">Hardened CI/CD pipelines with security scanning, IAM least-privilege policies and secrets management. Security baked in from day one, not bolted on after.</p>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
-    <!-- ═══ SERVICES ═══ -->
+    <!-- SERVICES -->
     <section id="services" aria-label="Services">
       <div class="container">
         <div class="section-header reveal">
@@ -1359,42 +1466,65 @@
           <p class="section-subtitle">What I can do for your team.</p>
         </div>
 
-        <div class="services-grid">
-          <div class="service-card reveal reveal-delay-1">
-            <p class="service-number">01</p>
-            <h3 class="service-title">Cloud Infrastructure Design</h3>
-            <p class="service-desc">Cloud environments built on AWS and Azure that scale with your product. Secure, efficient, and right the first time.</p>
+        <div class="services-list">
+          <div class="service-item reveal reveal-delay-1">
+            <div class="service-num-large">01</div>
+            <div class="service-divider"></div>
+            <div class="service-body">
+              <h3 class="service-body-title">Cloud Infrastructure Design</h3>
+              <p class="service-body-desc">Cloud environments built on AWS and Azure that scale with your product. Secure, efficient, and right the first time.</p>
+            </div>
           </div>
-          <div class="service-card reveal reveal-delay-2">
-            <p class="service-number">02</p>
-            <h3 class="service-title">Automation &amp; Infrastructure as Code</h3>
-            <p class="service-desc">I replace manual infrastructure with Terraform and Ansible. Version-controlled, repeatable, and safe for any engineer to run.</p>
+
+          <div class="service-item reveal reveal-delay-2">
+            <div class="service-num-large">02</div>
+            <div class="service-divider"></div>
+            <div class="service-body">
+              <h3 class="service-body-title">Automation &amp; Infrastructure as Code</h3>
+              <p class="service-body-desc">I replace manual infrastructure with Terraform and Ansible. Version-controlled, repeatable, and safe for any engineer to run.</p>
+            </div>
           </div>
-          <div class="service-card reveal reveal-delay-3">
-            <p class="service-number">03</p>
-            <h3 class="service-title">CI/CD Pipeline Engineering</h3>
-            <p class="service-desc">Automated pipelines from commit to production with testing, security scanning, and rollback built in. Your team ships faster, without the fear.</p>
+
+          <div class="service-item reveal reveal-delay-3">
+            <div class="service-num-large">03</div>
+            <div class="service-divider"></div>
+            <div class="service-body">
+              <h3 class="service-body-title">CI/CD Pipeline Engineering</h3>
+              <p class="service-body-desc">Automated pipelines from commit to production with testing, security scanning, and rollback built in. Your team ships faster, without the fear.</p>
+            </div>
           </div>
-          <div class="service-card reveal reveal-delay-1">
-            <p class="service-number">04</p>
-            <h3 class="service-title">Container Orchestration</h3>
-            <p class="service-desc">Production-grade Kubernetes environments that are self-healing, observable, and ready for real traffic.</p>
+
+          <div class="service-item reveal reveal-delay-1">
+            <div class="service-num-large">04</div>
+            <div class="service-divider"></div>
+            <div class="service-body">
+              <h3 class="service-body-title">Container Orchestration</h3>
+              <p class="service-body-desc">Production-grade Kubernetes environments that are self-healing, observable, and ready for real traffic.</p>
+            </div>
           </div>
-          <div class="service-card reveal reveal-delay-2">
-            <p class="service-number">05</p>
-            <h3 class="service-title">Monitoring &amp; Observability</h3>
-            <p class="service-desc">Full visibility across metrics, logs, and alerts so your team catches problems before anyone notices.</p>
+
+          <div class="service-item reveal reveal-delay-2">
+            <div class="service-num-large">05</div>
+            <div class="service-divider"></div>
+            <div class="service-body">
+              <h3 class="service-body-title">Monitoring &amp; Observability</h3>
+              <p class="service-body-desc">Full visibility across metrics, logs, and alerts so your team catches problems before anyone notices.</p>
+            </div>
           </div>
-          <div class="service-card reveal reveal-delay-3">
-            <p class="service-number">06</p>
-            <h3 class="service-title">Cloud Cost Optimization</h3>
-            <p class="service-desc">I audit your AWS environment, identify waste, and automate cleanup without touching performance.</p>
+
+          <div class="service-item reveal reveal-delay-3">
+            <div class="service-num-large">06</div>
+            <div class="service-divider"></div>
+            <div class="service-body">
+              <h3 class="service-body-title">Cloud Cost Optimization</h3>
+              <p class="service-body-desc">I audit your AWS environment, identify waste, and automate cleanup without touching performance.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ BLOG ═══ -->
+    <!-- BLOG -->
     <section id="blog" aria-label="Writing">
       <div class="container">
         <div class="blog-inner">
@@ -1417,7 +1547,7 @@
       </div>
     </section>
 
-    <!-- ═══ CONTACT ═══ -->
+    <!-- CONTACT -->
     <section id="contact" aria-label="Contact">
       <div class="container">
         <div class="section-header reveal">
@@ -1444,7 +1574,7 @@
               </div>
               <div class="form-success" id="form-success" role="alert">
                 <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                Message received — I'll get back to you within 24 hours.
+                Message received - I'll get back to you within 24 hours.
               </div>
               <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
                 Send Message <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
@@ -1504,7 +1634,7 @@
     </section>
   </main>
 
-  <!-- ═══ FOOTER ═══ -->
+  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
       <p class="footer-copy">© 2025 <span>Wangoi Mwangi</span>. Built with intention.</p>
@@ -1536,17 +1666,17 @@
   <script>
     'use strict';
 
-    /* ─── Particle Canvas ─────────────────────────────────────────────────── */
+    /* Particle Canvas - left 40% panel */
     (function () {
       const canvas = document.getElementById('hero-canvas');
       const ctx    = canvas.getContext('2d');
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      let W, H, particles, animId;
+      let W, H, particles;
 
-      const PARTICLE_COUNT = prefersReducedMotion ? 0 : 70;
-      const MAX_DIST = 130;
-      const ACCENT   = '0, 212, 255';
+      const PARTICLE_COUNT = prefersReducedMotion ? 0 : 65;
+      const MAX_DIST = 120;
+      const ACCENT   = '56, 189, 248';
 
       function resize () {
         W = canvas.width  = canvas.offsetWidth;
@@ -1576,7 +1706,7 @@
 
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${ACCENT}, ${p.a})`;
+          ctx.fillStyle = 'rgba(' + ACCENT + ', ' + p.a + ')';
           ctx.fill();
 
           for (let j = i + 1; j < particles.length; j++) {
@@ -1588,13 +1718,13 @@
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);
-              ctx.strokeStyle = `rgba(${ACCENT}, ${(1 - d / MAX_DIST) * 0.15})`;
+              ctx.strokeStyle = 'rgba(' + ACCENT + ', ' + ((1 - d / MAX_DIST) * 0.18) + ')';
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
           }
         }
-        animId = requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
       }
 
       function init () {
@@ -1612,13 +1742,12 @@
       init();
     }());
 
-    /* ─── Typing Animation ────────────────────────────────────────────────── */
+    /* Typing Animation */
     (function () {
-      const el      = document.getElementById('hero-tagline');
-      const text    = '"Your team shouldn\'t be afraid to deploy on a Friday."';
-      const cursor  = el.querySelector('.cursor');
-      let   i       = 0;
-      let   started = false;
+      const el     = document.getElementById('hero-tagline');
+      const text   = 'Your team shouldn\'t be afraid to deploy on a Friday.';
+      const cursor = el.querySelector('.cursor');
+      let   i      = 0;
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1635,15 +1764,14 @@
         }
       }
 
-      // Start after a short delay
       setTimeout(type, 900);
     }());
 
-    /* ─── Scroll Reveal ───────────────────────────────────────────────────── */
+    /* Scroll Reveal */
     (function () {
       const els = document.querySelectorAll('.reveal');
       const io  = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
+        entries.forEach(function (e) {
           if (e.isIntersecting) {
             e.target.classList.add('visible');
             io.unobserve(e.target);
@@ -1651,38 +1779,38 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-      els.forEach(el => io.observe(el));
+      els.forEach(function (el) { io.observe(el); });
     }());
 
-    /* ─── Active Nav Links ────────────────────────────────────────────────── */
+    /* Active Nav Links */
     (function () {
       const sections  = document.querySelectorAll('section[id]');
       const navLinks  = document.querySelectorAll('.nav-link');
       const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
 
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
           if (e.isIntersecting) {
-            const id = e.target.id;
-            navLinks.forEach(a => {
-              a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+            var id = e.target.id;
+            navLinks.forEach(function (a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + id);
             });
           }
         });
-      }, { rootMargin: `-${navHeight}px 0px -55% 0px`, threshold: 0 });
+      }, { rootMargin: '-' + navHeight + 'px 0px -55% 0px', threshold: 0 });
 
-      sections.forEach(s => io.observe(s));
+      sections.forEach(function (s) { io.observe(s); });
     }());
 
-    /* ─── Navbar Scroll ───────────────────────────────────────────────────── */
+    /* Navbar Scroll */
     (function () {
       const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
+      window.addEventListener('scroll', function () {
         navbar.classList.toggle('scrolled', window.scrollY > 20);
       }, { passive: true });
     }());
 
-    /* ─── Hamburger / Mobile Menu ─────────────────────────────────────────── */
+    /* Hamburger / Mobile Menu */
     (function () {
       const btn   = document.getElementById('hamburger');
       const menu  = document.getElementById('mobile-menu');
@@ -1695,40 +1823,39 @@
         document.body.style.overflow = '';
       }
 
-      btn.addEventListener('click', () => {
-        const isOpen = menu.classList.toggle('open');
+      btn.addEventListener('click', function () {
+        var isOpen = menu.classList.toggle('open');
         btn.classList.toggle('open', isOpen);
-        btn.setAttribute('aria-expanded', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
         document.body.style.overflow = isOpen ? 'hidden' : '';
       });
 
-      links.forEach(a => a.addEventListener('click', close));
+      links.forEach(function (a) { a.addEventListener('click', close); });
 
-      document.addEventListener('keydown', e => {
+      document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') close();
       });
     }());
 
-    /* ─── Contact Form ────────────────────────────────────────────────────── */
+    /* Contact Form */
     (function () {
       const form    = document.getElementById('contact-form');
       const success = document.getElementById('form-success');
 
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const name    = form.querySelector('#contact-name').value.trim();
-        const email   = form.querySelector('#contact-email').value.trim();
-        const message = form.querySelector('#contact-message').value.trim();
+        var name    = form.querySelector('#contact-name').value.trim();
+        var email   = form.querySelector('#contact-email').value.trim();
+        var message = form.querySelector('#contact-message').value.trim();
 
         if (!name || !email || !message) return;
 
-        const btn = form.querySelector('[type="submit"]');
+        var btn = form.querySelector('[type="submit"]');
         btn.disabled = true;
-        btn.textContent = 'Sending…';
+        btn.textContent = 'Sending...';
 
-        // Simulate network delay
-        setTimeout(() => {
+        setTimeout(function () {
           form.reset();
           success.classList.add('show');
           btn.style.display = 'none';
@@ -1737,13 +1864,13 @@
       });
     }());
 
-    /* ─── Back to Top ─────────────────────────────────────────────────────── */
+    /* Back to Top */
     (function () {
       const btn = document.getElementById('back-to-top');
-      window.addEventListener('scroll', () => {
+      window.addEventListener('scroll', function () {
         btn.classList.toggle('visible', window.scrollY > 500);
       }, { passive: true });
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }());
