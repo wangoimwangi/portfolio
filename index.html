@@ -292,7 +292,7 @@
     /* ═══ HERO ═══ */
     #home {
       position: relative;
-      min-height: 100vh;
+      min-height: 76vh;
       display: flex;
       overflow: hidden;
       padding: 0;
@@ -301,7 +301,7 @@
     .hero-split {
       display: flex;
       width: 100%;
-      min-height: 100vh;
+      min-height: 76vh;
       position: relative;
     }
 
@@ -312,7 +312,7 @@
       height: 100%;
       overflow: hidden;
       z-index: 0;
-      opacity: 0.38;
+      opacity: 0.55;
     }
 
     .hero-visual::after { display: none; }
@@ -329,7 +329,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 120px 80px 80px 40px;
+      align-items: center;
+      text-align: center;
+      padding: 100px 80px 60px;
       position: relative;
       z-index: 2;
     }
@@ -394,6 +396,7 @@
     .hero-ctas {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
     }
@@ -443,18 +446,19 @@
     .avatar-ring-wrap {
       border-radius: 50%;
       padding: 3px;
-      background: conic-gradient(
-        #38bdf8 0deg,
-        transparent 70deg,
-        transparent 180deg,
-        #38bdf8 250deg,
-        transparent 320deg,
-        transparent 360deg
-      );
-      animation: rotate 4s linear infinite;
+      background: #38bdf8;
       display: inline-flex;
       flex-shrink: 0;
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 40px rgba(56, 189, 248, 0.15);
+      animation: avatar-glow-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes avatar-glow-pulse {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.45), 0 0 22px rgba(56, 189, 248, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.75), 0 0 42px rgba(56, 189, 248, 0.38), 0 0 64px rgba(56, 189, 248, 0.15);
+      }
     }
 
     .about-avatar {
@@ -509,11 +513,11 @@
     }
 
     .tech-category-label {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
       opacity: 0.85;
       padding-bottom: 10px;
       border-bottom: 1px solid rgba(56, 189, 248, 0.15);
@@ -558,7 +562,7 @@
     }
 
     .tech-icon-name {
-      font-size: 0.72rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
       font-family: var(--font-mono);
       text-align: center;
@@ -874,20 +878,16 @@
 
     .contact-card-info { min-width: 0; }
     .contact-card-label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-    .contact-card-value {
       font-size: 0.875rem;
+      font-weight: 700;
       color: var(--text-secondary);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      margin-bottom: 0;
+      transition: color var(--transition);
     }
-    .contact-card:hover .contact-card-value { color: var(--accent); }
+    .contact-card:hover .contact-card-label { color: var(--accent); }
+    .contact-card-value { display: none; }
 
     /* ═══ FOOTER ═══ */
     footer {
@@ -1077,7 +1077,7 @@
               <i class="fa-solid fa-arrow-down" aria-hidden="true"></i> View My Work
             </a>
             <!-- UPDATE THIS LINK with your Google Drive CV URL -->
-            <a href="#" class="btn btn-outline" download>
+            <a href="https://drive.google.com/uc?export=download&id=1KN9qr6PWk_ph94OzaOaMp8PZNWHuC9P9" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
               <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV
             </a>
             <a href="#contact" class="btn btn-ghost">
@@ -1696,8 +1696,8 @@
 
       let W, H, particles;
 
-      const PARTICLE_COUNT = prefersReducedMotion ? 0 : 65;
-      const MAX_DIST = 120;
+      const PARTICLE_COUNT = prefersReducedMotion ? 0 : 140;
+      const MAX_DIST = 140;
       const ACCENT   = '56, 189, 248';
 
       function resize () {
@@ -1711,8 +1711,8 @@
           y:  Math.random() * H,
           vx: (Math.random() - 0.5) * 0.4,
           vy: (Math.random() - 0.5) * 0.4,
-          r:  Math.random() * 1.5 + 0.5,
-          a:  Math.random() * 0.5 + 0.2,
+          r:  Math.random() * 2 + 0.8,
+          a:  Math.random() * 0.55 + 0.35,
         }));
       }
 
@@ -1740,8 +1740,8 @@
               ctx.beginPath();
               ctx.moveTo(p.x, p.y);
               ctx.lineTo(q.x, q.y);
-              ctx.strokeStyle = 'rgba(' + ACCENT + ', ' + ((1 - d / MAX_DIST) * 0.18) + ')';
-              ctx.lineWidth = 0.5;
+              ctx.strokeStyle = 'rgba(' + ACCENT + ', ' + ((1 - d / MAX_DIST) * 0.32) + ')';
+              ctx.lineWidth = 0.6;
               ctx.stroke();
             }
           }
