@@ -302,24 +302,20 @@
       display: flex;
       width: 100%;
       min-height: 100vh;
+      position: relative;
     }
 
     .hero-visual {
-      width: 40%;
-      position: relative;
-      flex-shrink: 0;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
+      z-index: 0;
+      opacity: 0.38;
     }
 
-    .hero-visual::after {
-      content: '';
-      position: absolute;
-      top: 0; right: 0; bottom: 0;
-      width: 120px;
-      background: linear-gradient(to right, transparent, var(--bg-primary));
-      z-index: 1;
-      pointer-events: none;
-    }
+    .hero-visual::after { display: none; }
 
     #hero-canvas {
       position: absolute;
@@ -444,35 +440,34 @@
       top: calc(var(--nav-height) + 24px);
     }
 
+    .avatar-ring-wrap {
+      border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(
+        #38bdf8 0deg,
+        transparent 70deg,
+        transparent 180deg,
+        #38bdf8 250deg,
+        transparent 320deg,
+        transparent 360deg
+      );
+      animation: rotate 4s linear infinite;
+      display: inline-flex;
+      flex-shrink: 0;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), 0 0 40px rgba(56, 189, 248, 0.15);
+    }
+
     .about-avatar {
       width: 220px;
       height: 220px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--bg-card) 0%, #1a2744 100%);
-      border: 2px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       flex-shrink: 0;
       overflow: hidden;
-    }
-    .about-avatar::before {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      background: conic-gradient(var(--accent) 0deg, transparent 120deg, transparent 240deg, var(--accent) 360deg);
-      animation: rotate 6s linear infinite;
-      z-index: -1;
-    }
-    .about-avatar::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: var(--bg-secondary);
-      z-index: -1;
     }
 
     .about-avatar img {
@@ -501,62 +496,78 @@
     /* ═══ TECH STACK ═══ */
     #tech-stack { background: var(--bg-primary); }
 
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+    .tech-icon-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
     }
 
-    .stack-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: var(--transition);
-    }
-    .stack-card:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border-hover);
+    .tech-category {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .stack-category {
+    .tech-category-label {
       font-family: var(--font-mono);
       font-size: 0.72rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 16px;
+      opacity: 0.85;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
     }
 
-    .stack-tools {
+    .tech-icons-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 16px;
     }
 
-    .tool-chip {
-      display: inline-flex;
+    .tech-icon-item {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 7px;
-      padding: 6px 12px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 6px;
-      font-size: 0.825rem;
-      color: var(--text-secondary);
+      gap: 10px;
+      padding: 18px 14px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      min-width: 84px;
       transition: var(--transition);
+      cursor: default;
     }
-    .tool-chip:hover {
+
+    .tech-icon-item:hover {
       border-color: var(--accent);
-      color: var(--text-primary);
-      background: var(--accent-dim);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.22), 0 8px 24px rgba(0,0,0,0.3);
     }
-    .tool-chip img {
-      width: 16px;
-      height: 16px;
+
+    .tech-icon-item img {
+      width: 48px;
+      height: 48px;
       object-fit: contain;
+      transition: filter var(--transition);
+    }
+
+    .tech-icon-item:hover img {
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.55));
+    }
+
+    .tech-icon-name {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      text-align: center;
+      transition: color var(--transition);
+      white-space: nowrap;
+    }
+
+    .tech-icon-item:hover .tech-icon-name {
+      color: var(--accent);
     }
 
     /* ═══ PROJECTS ═══ */
@@ -969,19 +980,10 @@
       section { padding: 72px 0; }
       .stack-grid { grid-template-columns: 1fr; }
 
-      /* Hero split - stack vertically on mobile */
-      .hero-split { flex-direction: column; }
+      /* Hero full-background canvas on mobile */
       .hero-visual {
-        width: 100%;
-        min-height: 220px;
-        max-height: 260px;
-        flex-shrink: 0;
-      }
-      .hero-visual::after {
-        top: auto; right: 0; bottom: 0; left: 0;
-        width: auto;
-        height: 80px;
-        background: linear-gradient(to bottom, transparent, var(--bg-primary));
+        min-height: unset;
+        max-height: unset;
       }
       .hero-content {
         padding: 32px 24px 80px;
@@ -1074,6 +1076,7 @@
             <a href="#projects" class="btn btn-primary">
               <i class="fa-solid fa-arrow-down" aria-hidden="true"></i> View My Work
             </a>
+            <!-- UPDATE THIS LINK with your Google Drive CV URL -->
             <a href="#" class="btn btn-outline" download>
               <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Download CV
             </a>
@@ -1095,8 +1098,10 @@
         <div class="about-grid">
           <!-- Left: Photo -->
           <div class="about-avatar-wrap reveal">
-            <div class="about-avatar">
-              <img src="profile.jpg" alt="Wangoi Mwangi - DevOps Engineer" />
+            <div class="avatar-ring-wrap">
+              <div class="about-avatar">
+                <img src="profile.jpg" alt="Wangoi Mwangi - DevOps Engineer" />
+              </div>
             </div>
           </div>
 
@@ -1128,128 +1133,145 @@
           <p class="section-subtitle">The tools I use in production.</p>
         </div>
 
-        <div class="stack-grid">
-          <!-- Cloud -->
-          <div class="stack-card reveal reveal-delay-1">
-            <p class="stack-category">Cloud</p>
-            <div class="stack-tools">
-              <span class="tool-chip">
+        <div class="tech-icon-grid reveal">
+
+          <!-- Cloud Platforms -->
+          <div class="tech-category">
+            <p class="tech-category-label">Cloud Platforms</p>
+            <div class="tech-icons-row">
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" />
-                AWS
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">AWS</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" alt="Azure" />
-                Azure
-              </span>
+                <span class="tech-icon-name">Azure</span>
+              </div>
             </div>
           </div>
 
-          <!-- IaC -->
-          <div class="stack-card reveal reveal-delay-2">
-            <p class="stack-category">Infrastructure as Code</p>
-            <div class="stack-tools">
-              <span class="tool-chip">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" />
-                Terraform
-              </span>
-              <span class="tool-chip">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" alt="Ansible" />
-                Ansible
-              </span>
-            </div>
-          </div>
-
-          <!-- Containerization -->
-          <div class="stack-card reveal reveal-delay-3">
-            <p class="stack-category">Containerization</p>
-            <div class="stack-tools">
-              <span class="tool-chip">
+          <!-- Containerization & Orchestration -->
+          <div class="tech-category">
+            <p class="tech-category-label">Containerization &amp; Orchestration</p>
+            <div class="tech-icons-row">
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" />
-                Kubernetes
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Kubernetes</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" />
-                Docker
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Docker</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/helm/helm-original.svg" alt="Helm" />
-                Helm
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Helm</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/argocd/argocd-original.svg" alt="ArgoCD" />
-                ArgoCD (GitOps)
-              </span>
+                <span class="tech-icon-name">ArgoCD (GitOps)</span>
+              </div>
             </div>
           </div>
 
-          <!-- CI/CD -->
-          <div class="stack-card reveal reveal-delay-1">
-            <p class="stack-category">CI/CD</p>
-            <div class="stack-tools">
-              <span class="tool-chip">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub Actions" />
-                GitHub Actions
-              </span>
-              <span class="tool-chip">
+          <!-- Infrastructure as Code -->
+          <div class="tech-category">
+            <p class="tech-category-label">Infrastructure as Code</p>
+            <div class="tech-icons-row">
+              <div class="tech-icon-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg" alt="Terraform" />
+                <span class="tech-icon-name">Terraform</span>
+              </div>
+              <div class="tech-icon-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg" alt="Ansible" />
+                <span class="tech-icon-name">Ansible</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CI/CD & Automation -->
+          <div class="tech-category">
+            <p class="tech-category-label">CI/CD &amp; Automation</p>
+            <div class="tech-icons-row">
+              <div class="tech-icon-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" />
+                <span class="tech-icon-name">GitHub Actions</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" alt="Jenkins" />
-                Jenkins
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Jenkins</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuredevops/azuredevops-original.svg" alt="Azure DevOps" />
-                Azure DevOps
-              </span>
+                <span class="tech-icon-name">Azure DevOps</span>
+              </div>
             </div>
           </div>
 
-          <!-- Monitoring -->
-          <div class="stack-card reveal reveal-delay-2">
-            <p class="stack-category">Monitoring</p>
-            <div class="stack-tools">
-              <span class="tool-chip">
+          <!-- Observability & Monitoring -->
+          <div class="tech-category">
+            <p class="tech-category-label">Observability &amp; Monitoring</p>
+            <div class="tech-icons-row">
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg" alt="Prometheus" />
-                Prometheus
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Prometheus</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg" alt="Grafana" />
-                Grafana
-              </span>
-              <span class="tool-chip">ELK Stack</span>
+                <span class="tech-icon-name">Grafana</span>
+              </div>
+              <div class="tech-icon-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg" alt="ELK Stack" />
+                <span class="tech-icon-name">ELK Stack</span>
+              </div>
             </div>
           </div>
 
           <!-- DevSecOps -->
-          <div class="stack-card reveal reveal-delay-3">
-            <p class="stack-category">DevSecOps</p>
-            <div class="stack-tools">
-              <span class="tool-chip">IAM</span>
-              <span class="tool-chip">RBAC</span>
-              <span class="tool-chip">Secrets Management</span>
-              <span class="tool-chip">Security Scanning</span>
+          <div class="tech-category">
+            <p class="tech-category-label">DevSecOps</p>
+            <div class="tech-icons-row">
+              <div class="tech-icon-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sonarqube/sonarqube-original.svg" alt="SonarQube" />
+                <span class="tech-icon-name">SonarQube</span>
+              </div>
+              <div class="tech-icon-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/snyk/snyk-original.svg" alt="Snyk" />
+                <span class="tech-icon-name">Snyk</span>
+              </div>
+              <div class="tech-icon-item">
+                <img src="https://cdn.simpleicons.org/trivy/1904DA" alt="Trivy" />
+                <span class="tech-icon-name">Trivy</span>
+              </div>
+              <div class="tech-icon-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vault/vault-original.svg" alt="HashiCorp Vault" />
+                <span class="tech-icon-name">HashiCorp Vault</span>
+              </div>
             </div>
           </div>
 
-          <!-- Programming -->
-          <div class="stack-card reveal reveal-delay-1">
-            <p class="stack-category">Programming &amp; Scripting</p>
-            <div class="stack-tools">
-              <span class="tool-chip">
+          <!-- Programming & Systems -->
+          <div class="tech-category">
+            <p class="tech-category-label">Programming &amp; Systems</p>
+            <div class="tech-icons-row">
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" />
-                Python
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Python</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" alt="Bash" />
-                Bash
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Bash</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" />
-                Linux
-              </span>
-              <span class="tool-chip">
+                <span class="tech-icon-name">Linux</span>
+              </div>
+              <div class="tech-icon-item">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" />
-                Git
-              </span>
+                <span class="tech-icon-name">Git</span>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -1516,7 +1538,7 @@
             <div class="service-num-large">06</div>
             <div class="service-divider"></div>
             <div class="service-body">
-              <h3 class="service-body-title">Cloud Cost Optimization</h3>
+              <h3 class="service-body-title">Cloud Cost Optimisation</h3>
               <p class="service-body-desc">I audit your AWS environment, identify waste, and automate cleanup without touching performance.</p>
             </div>
           </div>
@@ -1529,7 +1551,7 @@
       <div class="container">
         <div class="blog-inner">
           <div class="reveal">
-            <p class="section-label" style="justify-content:center;">Writing</p>
+            <p class="section-label" style="justify-content:center;">Blog</p>
             <h2 class="section-title" style="text-align:center;">I write about what I build.</h2>
           </div>
           <div class="reveal reveal-delay-1">
@@ -1559,7 +1581,7 @@
         <div class="contact-grid">
           <!-- Form -->
           <div class="reveal reveal-delay-1">
-            <form class="contact-form" id="contact-form" novalidate>
+            <form class="contact-form" id="contact-form" action="https://formspree.io/f/xzdjlwyo" method="POST" novalidate>
               <div class="form-group">
                 <label for="contact-name">Name</label>
                 <input type="text" id="contact-name" name="name" placeholder="Your name" required autocomplete="name" />
@@ -1637,7 +1659,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
-      <p class="footer-copy">© 2025 <span>Wangoi Mwangi</span>. Built with intention.</p>
+      <p class="footer-copy">© 2026 <span>Wangoi Mwangi</span>. DevOps Engineer</p>
       <div class="footer-socials" role="list">
         <a href="mailto:mary.wangoi2025@gmail.com" class="footer-social" aria-label="Email" role="listitem">
           <i class="fa-solid fa-envelope" aria-hidden="true"></i>
@@ -1855,12 +1877,19 @@
         btn.disabled = true;
         btn.textContent = 'Sending...';
 
-        setTimeout(function () {
+        fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        }).then(function () {
           form.reset();
           success.classList.add('show');
           btn.style.display = 'none';
           success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 900);
+        }).catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Send Message';
+        });
       });
     }());
 
