@@ -1,4 +1,4 @@
-# Wangoi Mwangi — Portfolio
+# Wangoi Mwangi - Portfolio
 Personal portfolio website for Wangoi Mwangi, DevOps Engineer.
 
 **Live site:** https://wangoimwangi.github.io/portfolio
